@@ -71,7 +71,7 @@ const MentionInput: FC<MentionInputProps> = ({
       selection,
       partTypes
     );
-  }, [parts, plainText, selection, partTypes]);
+  }, [parts, plainText, partTypes]);
 
   /**
    * Callback on mention suggestion press. We should:
