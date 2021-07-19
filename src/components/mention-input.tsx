@@ -1,4 +1,11 @@
-import React, { FC, MutableRefObject, useMemo, useRef, useState } from "react";
+import React, {
+  FC,
+  MutableRefObject,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from "react";
 import {
   NativeSyntheticEvent,
   Text,
@@ -36,10 +43,13 @@ const MentionInput: FC<MentionInputProps> = ({
   const textInput = useRef<TextInput | null>(null);
 
   const [selection, setSelection] = useState({ start: 0, end: 0 });
-
   const { plainText, parts } = useMemo(
     () => parseValue(value, partTypes),
     [value, partTypes]
+  );
+
+  const [keywordByTrigger, setKeywordByTrigger] = useState(
+    getMentionPartSuggestionKeywords(parts, plainText, selection, partTypes)
   );
 
   const handleSelectionChange = (
@@ -64,14 +74,23 @@ const MentionInput: FC<MentionInputProps> = ({
   /**
    * We memoize the keyword to know should we show mention suggestions or not
    */
-  const keywordByTrigger = useMemo(() => {
-    return getMentionPartSuggestionKeywords(
-      parts,
-      plainText,
-      selection,
-      partTypes
+
+  useEffect(() => {
+    setKeywordByTrigger(
+      getMentionPartSuggestionKeywords(parts, plainText, selection, partTypes)
+    );
+    onKeywordChanged(
+      getMentionPartSuggestionKeywords(parts, plainText, selection, partTypes)
     );
   }, [parts, plainText, partTypes]);
+  // const keywordByTrigger = useMemo(() => {
+  //   return getMentionPartSuggestionKeywords(
+  //     parts,
+  //     plainText,
+  //     selection,
+  //     partTypes
+  //   );
+  // }, [parts, plainText, partTypes]);
 
   /**
    * Callback on mention suggestion press. We should:
@@ -122,7 +141,7 @@ const MentionInput: FC<MentionInputProps> = ({
   };
 
   const renderMentionSuggestions = (mentionType: MentionPartType) => {
-    onKeywordChanged && onKeywordChanged(keywordByTrigger[mentionType.trigger]);
+    // onKeywordChanged && onKeywordChanged(keywordByTrigger[mentionType.trigger]);
     return (
       <React.Fragment key={mentionType.trigger}>
         {mentionType.renderSuggestions &&
