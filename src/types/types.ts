@@ -107,7 +107,7 @@ type MentionInputProps = Omit<TextInputProps, "onChange"> & {
 
   containerStyle?: StyleProp<ViewStyle>;
 
-  onKeywordChanged: (keyword: any) => void;
+  onKeywordChanged: () => void;
 };
 
 export type {
