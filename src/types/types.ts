@@ -19,8 +19,8 @@ type MentionData = {
   original: string;
   trigger: string;
   name: string;
-  userId: string;
   id: string;
+  userId: string;
   role: string;
 };
 

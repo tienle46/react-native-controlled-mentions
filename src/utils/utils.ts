@@ -431,11 +431,15 @@ const getMentionDataFromRegExMatchResult = ([
   trigger,
   name,
   id,
+  userId,
+  role,
 ]: RegexMatchResult): MentionData => ({
   original,
   trigger,
   name,
   id,
+  userId,
+  role,
 });
 
 /**
@@ -572,13 +576,17 @@ const replaceMentionValues = (
   value: string,
   replacer: (mention: MentionData) => string
 ) =>
-  value.replace(mentionRegEx, (fullMatch, original, trigger, name, id) =>
-    replacer({
-      original,
-      trigger,
-      name,
-      id,
-    })
+  value.replace(
+    mentionRegEx,
+    (fullMatch, original, trigger, name, id, userId, role) =>
+      replacer({
+        original,
+        trigger,
+        name,
+        id,
+        userId,
+        role,
+      })
   );
 
 export {
