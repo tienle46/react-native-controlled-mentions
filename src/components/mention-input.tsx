@@ -44,7 +44,7 @@ const MentionInput: FC<MentionInputProps> = ({
 
   const [selection, setSelection] = useState({ start: 0, end: 0 });
 
-  const [keywordByTrigger, setKeywordByTrigger] = useState({});
+  const [keywordByTrigger, setKeywordByTrigger] = useState();
 
   const { plainText, parts } = useMemo(
     () => parseValue(value, partTypes),
@@ -137,7 +137,9 @@ const MentionInput: FC<MentionInputProps> = ({
     <React.Fragment key={mentionType.trigger}>
       {mentionType.renderSuggestions &&
         mentionType.renderSuggestions({
-          keyword: keywordByTrigger[mentionType.trigger],
+          keyword: keywordByTrigger[mentionType.trigger]
+            ? keywordByTrigger[mentionType.trigger]
+            : "",
           onSuggestionPress: onSuggestionPress(mentionType),
         })}
     </React.Fragment>
