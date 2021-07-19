@@ -139,7 +139,7 @@ const MentionInput: FC<MentionInputProps> = ({
         mentionType.renderSuggestions({
           keyword: keywordByTrigger[mentionType.trigger]
             ? keywordByTrigger[mentionType.trigger]
-            : "",
+            : undefined,
           onSuggestionPress: onSuggestionPress(mentionType),
         })}
     </React.Fragment>

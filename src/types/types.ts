@@ -1,6 +1,12 @@
-import type { Change } from 'diff';
-import type { ReactNode, Ref } from 'react';
-import type { StyleProp, TextInput, TextInputProps, TextStyle, ViewStyle } from 'react-native';
+import type { Change } from "diff";
+import type { ReactNode, Ref } from "react";
+import type {
+  StyleProp,
+  TextInput,
+  TextInputProps,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 
 type Suggestion = {
   id: string;
@@ -14,7 +20,7 @@ type MentionData = {
   id: string;
 };
 
-type CharactersDiffChange = Omit<Change, 'count'> & { count: number };
+type CharactersDiffChange = Omit<Change, "count"> & { count: number };
 
 type RegexMatchResult = string[] & {
   // Matched string
@@ -91,7 +97,7 @@ type Part = {
   data?: MentionData;
 };
 
-type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
+type MentionInputProps = Omit<TextInputProps, "onChange"> & {
   value: string;
   onChange: (value: string) => any;
 
@@ -100,6 +106,8 @@ type MentionInputProps = Omit<TextInputProps, 'onChange'> & {
   inputRef?: Ref<TextInput>;
 
   containerStyle?: StyleProp<ViewStyle>;
+
+  onKeywordChanged: () => void;
 };
 
 export type {
