@@ -44,13 +44,11 @@ const MentionInput: FC<MentionInputProps> = ({
 
   const [selection, setSelection] = useState({ start: 0, end: 0 });
 
+  const [keywordByTrigger, setKeywordByTrigger] = useState({ "@": undefined });
+
   const { plainText, parts } = useMemo(
     () => parseValue(value, partTypes),
     [value, partTypes]
-  );
-
-  const [keywordByTrigger, setKeywordByTrigger] = useState(
-    getMentionPartSuggestionKeywords(parts, plainText, selection, partTypes)
   );
 
   const handleSelectionChange = (
