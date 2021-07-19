@@ -9,6 +9,7 @@ import type {
 } from "react-native";
 
 type Suggestion = {
+  id: string;
   userId: string;
   name: string;
   role: string;
@@ -19,6 +20,8 @@ type MentionData = {
   trigger: string;
   name: string;
   userId: string;
+  id: string;
+  role: string;
 };
 
 type CharactersDiffChange = Omit<Change, "count"> & { count: number };
