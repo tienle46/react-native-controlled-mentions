@@ -9,8 +9,9 @@ import type {
 } from "react-native";
 
 type Suggestion = {
-  id: string;
+  userId: string;
   name: string;
+  role: string;
 };
 
 type MentionData = {
