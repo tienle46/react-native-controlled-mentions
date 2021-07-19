@@ -18,7 +18,7 @@ type MentionData = {
   original: string;
   trigger: string;
   name: string;
-  id: string;
+  userId: string;
 };
 
 type CharactersDiffChange = Omit<Change, "count"> & { count: number };
