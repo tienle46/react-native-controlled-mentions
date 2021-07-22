@@ -6,6 +6,7 @@ import React, {
   useState,
   useEffect,
   forwardRef,
+  useImperativeHandle,
 } from "react";
 import {
   NativeSyntheticEvent,
@@ -42,8 +43,8 @@ const MentionInput: FC<MentionInputProps> = forwardRef(
       onSelectionChange,
 
       ...textInputProps
-    },
-    ref
+    }: MentionInputProps,
+    ref: any
   ) => {
     const textInput = useRef<TextInput | null>(null);
 
@@ -102,6 +103,25 @@ const MentionInput: FC<MentionInputProps> = forwardRef(
      * - Get updated value
      * - Trigger onChange callback with new value
      */
+
+    useImperativeHandle(ref, () => ({
+      onSuggestionPress(mentionType: MentionPartType, suggestion: Suggestion) {
+        const newValue = generateValueWithAddedSuggestion(
+          parts,
+          mentionType,
+          plainText,
+          selection,
+          suggestion
+        );
+
+        if (!newValue) {
+          return;
+        }
+
+        onChange(newValue);
+      },
+    }));
+
     const onSuggestionPress =
       (mentionType: MentionPartType) => (suggestion: Suggestion) => {
         const newValue = generateValueWithAddedSuggestion(
