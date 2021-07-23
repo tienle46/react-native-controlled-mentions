@@ -88,7 +88,7 @@ const MentionInput: FC<MentionInputProps> = forwardRef(
       onKeywordChanged(
         getMentionPartSuggestionKeywords(parts, plainText, selection, partTypes)
       );
-    }, [parts, plainText, partTypes]);
+    }, [parts, plainText, selection, partTypes]);
     // const keywordByTrigger = useMemo(() => {
     //   return getMentionPartSuggestionKeywords(
     //     parts,
